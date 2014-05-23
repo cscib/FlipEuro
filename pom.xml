@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>flip-euro</groupId>
+  <artifactId>flip-euro</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>FlipEuro Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+   <properties>
+           <log4j.version>1.2.17</log4j.version>
+           <spring-version>4.0.5.RELEASE</spring-version>
+           <junit-version>4.11</junit-version>
+           <velocity-version>1.7</velocity-version>
+           <slf4j-log4j.version>1.7.7</slf4j-log4j.version>
+           <servletApi.version>2.5</servletApi.version>
+  </properties>
+
+  <dependencies>
+
+    <!-- JUnit Dependency -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit-version}</version>
+      <scope>test</scope>
+    </dependency>
+
+      <!--Logging Dependencies-->
+      <dependency>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+          <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+          <version>${slf4j-log4j.version}</version>
+      </dependency>
+
+
+      <!--Velocity-->
+      <dependency>
+          <groupId>org.apache.velocity</groupId>
+          <artifactId>velocity</artifactId>
+          <version>${velocity-version}</version>
+      </dependency>
+
+      <!--Spring-->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-webmvc</artifactId>
+          <version>${spring-version}</version>
+      </dependency>
+
+      <!-- Servlet API -->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+          <version>${servletApi.version}</version>
+          <scope>provided</scope>
+      </dependency>
+
+  </dependencies>
+
+
+  <build>
+    <finalName>FlipEuro</finalName>
+  </build>
+</project>
