@@ -11,11 +11,11 @@ import java.sql.Date;
  */
 
 @Entity
-@Table(name = "COIN_FLIP", schema = "PUBLIC", catalog = "PUBLIC")
+@Table(name = "COIN_FLIP")
 public class CoinFlip {
-    private long coinFlipId;
-    private long userId;
-    private long coinId;
+    private Long coinFlipId;
+    private Long userId;
+    private Long coinId;
     private Date coinFlipDate;
     private String bet;
     private String outcome;
@@ -24,31 +24,31 @@ public class CoinFlip {
 
     @Id
     @Column(name = "COIN_FLIP_ID", nullable = false, insertable = true, updatable = true)
-    public long getCoinFlipId() {
+    public Long getCoinFlipId() {
         return coinFlipId;
     }
 
-    public void setCoinFlipId(long coinFlipId) {
+    public void setCoinFlipId(Long coinFlipId) {
         this.coinFlipId = coinFlipId;
     }
 
     @Basic
     @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true)
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
     @Basic
     @Column(name = "COIN_ID", nullable = false, insertable = true, updatable = true)
-    public long getCoinId() {
+    public Long getCoinId() {
         return coinId;
     }
 
-    public void setCoinId(long coinId) {
+    public void setCoinId(Long coinId) {
         this.coinId = coinId;
     }
 
@@ -89,9 +89,9 @@ public class CoinFlip {
 
         CoinFlip coinFlip = (CoinFlip) o;
 
-        if (coinFlipId != coinFlip.coinFlipId) return false;
-        if (coinId != coinFlip.coinId) return false;
-        if (userId != coinFlip.userId) return false;
+        if (coinFlipId != null ? !coinFlipId.equals(coinFlip.coinFlipId) : coinFlip.coinFlipId != null) return false;
+        if (coinId != null ? !coinId.equals(coinFlip.coinId) : coinFlip.coinId != null) return false;
+        if (userId != null ? !userId.equals(coinFlip.userId) : coinFlip.userId != null) return false;
         if (bet != null ? !bet.equals(coinFlip.bet) : coinFlip.bet != null) return false;
         if (coinFlipDate != null ? !coinFlipDate.equals(coinFlip.coinFlipDate) : coinFlip.coinFlipDate != null)
             return false;
@@ -102,9 +102,9 @@ public class CoinFlip {
 
     @Override
     public int hashCode() {
-        int result = (int) (coinFlipId ^ (coinFlipId >>> 32));
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
-        result = 31 * result + (int) (coinId ^ (coinId >>> 32));
+        int result = coinFlipId != null ? coinFlipId.hashCode() : 0;
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (coinId != null ? coinId.hashCode() : 0);
         result = 31 * result + (coinFlipDate != null ? coinFlipDate.hashCode() : 0);
         result = 31 * result + (bet != null ? bet.hashCode() : 0);
         result = 31 * result + (outcome != null ? outcome.hashCode() : 0);

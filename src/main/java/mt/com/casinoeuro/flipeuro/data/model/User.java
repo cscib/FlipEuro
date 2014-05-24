@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 @Entity
 public class User {
-    private long userId;
+    private Long userId;
     private String firstname;
     private String lastname;
     private String username;
@@ -20,7 +20,7 @@ public class User {
     private Date dateOfBirth;
     private String address;
     private Double balance;
-    private long roleId;
+    private Long roleId;
     private Collection<CoinFlip> coinFlipsByUserId;
     private Collection<CreditCard> creditCardsByUserId;
     private Collection<Deposit> depositsByUserId;
@@ -28,11 +28,11 @@ public class User {
 
     @Id
     @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true)
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -108,11 +108,11 @@ public class User {
 
     @Basic
     @Column(name = "ROLE_ID", nullable = false, insertable = true, updatable = true)
-    public long getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(long roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -123,8 +123,8 @@ public class User {
 
         User user = (User) o;
 
-        if (roleId != user.roleId) return false;
-        if (userId != user.userId) return false;
+        if (roleId != null ? !roleId.equals(user.roleId) : user.roleId != null) return false;
+        if (userId != null ? !userId.equals(user.userId) : user.userId != null) return false;
         if (address != null ? !address.equals(user.address) : user.address != null) return false;
         if (balance != null ? !balance.equals(user.balance) : user.balance != null) return false;
         if (dateOfBirth != null ? !dateOfBirth.equals(user.dateOfBirth) : user.dateOfBirth != null) return false;
@@ -138,7 +138,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = (int) (userId ^ (userId >>> 32));
+        int result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
@@ -146,7 +146,8 @@ public class User {
         result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (balance != null ? balance.hashCode() : 0);
-        result = 31 * result + (int) (roleId ^ (roleId >>> 32));
+        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
+
         return result;
     }
 

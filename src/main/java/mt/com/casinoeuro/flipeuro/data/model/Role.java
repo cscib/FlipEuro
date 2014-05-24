@@ -11,17 +11,17 @@ import java.util.Collection;
  */
 @Entity
 public class Role {
-    private long roleId;
+    private Long roleId;
     private String roleName;
     private Collection<User> usersByRoleId;
 
     @Id
     @Column(name = "ROLE_ID", nullable = false, insertable = true, updatable = true)
-    public long getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(long roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -50,7 +50,7 @@ public class Role {
 
     @Override
     public int hashCode() {
-        int result = (int) (roleId ^ (roleId >>> 32));
+        int result = roleId != null ? roleId.hashCode() : 0;
         result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         return result;
     }

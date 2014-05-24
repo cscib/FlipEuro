@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 @Entity
 public class Coin {
-    private long coinId;
+    private Long coinId;
     private String name;
     private Double denomination;
     private String currency;
@@ -19,11 +19,11 @@ public class Coin {
 
     @Id
     @Column(name = "COIN_ID", nullable = false, insertable = true, updatable = true)
-    public long getCoinId() {
+    public Long getCoinId() {
         return coinId;
     }
 
-    public void setCoinId(long coinId) {
+    public void setCoinId(Long coinId) {
         this.coinId = coinId;
     }
 
@@ -64,7 +64,7 @@ public class Coin {
 
         Coin coin = (Coin) o;
 
-        if (coinId != coin.coinId) return false;
+        if (coinId != null ? !coinId.equals(coin.coinId) : coin.coinId != null) return false;
         if (currency != null ? !currency.equals(coin.currency) : coin.currency != null) return false;
         if (denomination != null ? !denomination.equals(coin.denomination) : coin.denomination != null) return false;
         if (name != null ? !name.equals(coin.name) : coin.name != null) return false;
@@ -74,7 +74,7 @@ public class Coin {
 
     @Override
     public int hashCode() {
-        int result = (int) (coinId ^ (coinId >>> 32));
+        int result = coinId != null ? coinId.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (denomination != null ? denomination.hashCode() : 0);
         result = 31 * result + (currency != null ? currency.hashCode() : 0);

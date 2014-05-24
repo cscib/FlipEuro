@@ -10,10 +10,10 @@ import java.util.Collection;
  * @since 24/05/14 11.03
  */
 @Entity
-@Table(name = "CREDIT_CARD", schema = "PUBLIC", catalog = "PUBLIC")
+@Table(name = "CREDIT_CARD")
 public class CreditCard {
-    private long creditCardId;
-    private long userId;
+    private Long creditCardId;
+    private Long userId;
     private String cardNumber;
     private String cardHoldersName;
     private Byte expiryMonth;
@@ -23,21 +23,21 @@ public class CreditCard {
 
     @Id
     @Column(name = "CREDIT_CARD_ID", nullable = false, insertable = true, updatable = true)
-    public long getCreditCardId() {
+    public Long getCreditCardId() {
         return creditCardId;
     }
 
-    public void setCreditCardId(long creditCardId) {
+    public void setCreditCardId(Long creditCardId) {
         this.creditCardId = creditCardId;
     }
 
     @Basic
     @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true)
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -88,8 +88,8 @@ public class CreditCard {
 
         CreditCard that = (CreditCard) o;
 
-        if (creditCardId != that.creditCardId) return false;
-        if (userId != that.userId) return false;
+        if (creditCardId != null ? !creditCardId.equals(that.creditCardId) : that.creditCardId != null) return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         if (cardHoldersName != null ? !cardHoldersName.equals(that.cardHoldersName) : that.cardHoldersName != null)
             return false;
         if (cardNumber != null ? !cardNumber.equals(that.cardNumber) : that.cardNumber != null) return false;
@@ -101,8 +101,8 @@ public class CreditCard {
 
     @Override
     public int hashCode() {
-        int result = (int) (creditCardId ^ (creditCardId >>> 32));
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        int result = creditCardId != null ? creditCardId.hashCode() : 0;
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (cardNumber != null ? cardNumber.hashCode() : 0);
         result = 31 * result + (cardHoldersName != null ? cardHoldersName.hashCode() : 0);
         result = 31 * result + (expiryMonth != null ? expiryMonth.hashCode() : 0);

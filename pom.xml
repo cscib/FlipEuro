@@ -11,6 +11,7 @@
    <properties>
            <log4j.version>1.2.17</log4j.version>
            <spring-version>4.0.5.RELEASE</spring-version>
+           <spring-data-version>1.5.2.RELEASE</spring-data-version>
            <junit-version>4.11</junit-version>
            <velocity-version>1.7</velocity-version>
            <slf4j-log4j.version>1.7.7</slf4j-log4j.version>
@@ -78,6 +79,15 @@
           <groupId>org.springframework</groupId>
           <artifactId>spring-tx</artifactId>
           <version>${spring-version}</version>
+      </dependency>
+
+      <!--
+      Spring Data module for JPA repositories
+      -->
+      <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-jpa</artifactId>
+          <version>${spring-data-version}</version>
       </dependency>
 
 
