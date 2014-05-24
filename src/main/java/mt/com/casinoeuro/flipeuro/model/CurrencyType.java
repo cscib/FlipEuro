@@ -2,9 +2,9 @@ package mt.com.casinoeuro.flipeuro.model;
 
 /**
  * The currency type model representation.
- * User: cscib
- * Date: 23/05/14
- * Time: 20.04
+ * @author cscib
+ * @version 1.0.0
+ * @since  23/05/14 20.04
  */
 public enum CurrencyType {
 

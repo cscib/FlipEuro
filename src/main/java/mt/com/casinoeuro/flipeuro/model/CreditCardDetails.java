@@ -2,9 +2,9 @@ package mt.com.casinoeuro.flipeuro.model;
 
 /**
  * The credit card deposit model representation.
- * User: cscib
- * Date: 23/05/14
- * Time: 19.37
+ * @author cscib
+ * @version 1.0.0
+ * @since  23/05/14 19.37
  */
 public class CreditCardDetails {
 

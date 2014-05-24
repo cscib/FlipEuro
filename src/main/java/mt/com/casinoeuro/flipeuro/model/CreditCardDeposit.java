@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 /**
  * The credit card deposit model representation.
- * User: cscib
- * Date: 23/05/14
- * Time: 19.45
+ * @author cscib
+ * @version 1.0.0
+ * @since  23/05/14 19.45
  */
 public class CreditCardDeposit {
 

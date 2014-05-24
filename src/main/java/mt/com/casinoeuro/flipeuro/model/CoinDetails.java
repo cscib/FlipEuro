@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 /**
  * The coin details model representation.
- * User: Caroline
- * Date: 23/05/14
- * Time: 19.59
+ * @author cscib
+ * @version 1.0.0
+ * @since  23/05/14 19.59
  */
 public class CoinDetails {
 

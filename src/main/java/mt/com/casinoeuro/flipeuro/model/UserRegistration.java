@@ -5,10 +5,9 @@ import java.util.Date;
 
 /**
  * The user registration model representation.
- * User: cscib
- * Date: 23/05/14
- * Time: 19.21
- *
+ * @author cscib
+ * @version 1.0.0
+ * @since 23/05/14 19.21
  */
 public class UserRegistration {
 
