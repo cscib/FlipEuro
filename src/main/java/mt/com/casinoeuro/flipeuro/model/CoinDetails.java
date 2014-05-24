@@ -1,5 +1,7 @@
 package mt.com.casinoeuro.flipeuro.model;
 
+import java.math.BigDecimal;
+
 /**
  * The coin details model representation.
  * User: Caroline
@@ -12,7 +14,7 @@ public class CoinDetails {
     private String name;
 
     /** The denomination. */
-    private String denomination;
+    private BigDecimal denomination;
 
     /** The currency. */
     private CurrencyType currency;
@@ -21,7 +23,7 @@ public class CoinDetails {
         return name;
     }
 
-    public String getDenomination() {
+    public BigDecimal getDenomination() {
         return denomination;
     }
 

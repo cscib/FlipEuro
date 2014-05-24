@@ -15,6 +15,10 @@
            <velocity-version>1.7</velocity-version>
            <slf4j-log4j.version>1.7.7</slf4j-log4j.version>
            <servletApi.version>2.5</servletApi.version>
+           <hsqldb-version>2.3.2</hsqldb-version>
+           <hibernate-annotations-version>3.5.6-Final</hibernate-annotations-version>
+           <hibernate-version>4.3.5.Final</hibernate-version>
+           <tomcat.plugin.version>2.2</tomcat.plugin.version>
   </properties>
 
   <dependencies>
@@ -54,6 +58,44 @@
           <version>${spring-version}</version>
       </dependency>
 
+      <!--
+          Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
+          (depends on spring-core, spring-beans, spring-context, spring-tx)
+          Define this if you need ORM (org.springframework.orm.*)
+      -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-orm</artifactId>
+          <version>${spring-version}</version>
+      </dependency>
+
+      <!--
+          Transaction Management Abstraction (depends on spring-core, spring-beans, spring-aop, spring-context)
+          Define this if you use Spring Transactions or DAO Exception Hierarchy
+          (org.springframework.transaction.*/org.springframework.dao.*)
+      -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
+          <version>${spring-version}</version>
+      </dependency>
+
+
+      <!-- Hibernate library dependecy start -->
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+          <version>${hibernate-version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.hsqldb</groupId>
+          <artifactId>hsqldb</artifactId>
+          <version>${hsqldb-version}</version>
+      </dependency>
+
+
+
       <!-- Servlet API -->
       <dependency>
           <groupId>javax.servlet</groupId>
@@ -66,6 +108,35 @@
 
 
   <build>
+      <directory>${project.basedir}/target</directory>
+      <plugins>
+
+          <!-- Copy all of the dependencies to the target's lib directory -->
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <id>copy</id>
+                      <phase>install</phase>
+                      <goals>
+                          <goal>copy-dependencies</goal>
+                      </goals>
+                      <configuration>
+                          <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+
+          <plugin>
+              <groupId>org.apache.tomcat.maven</groupId>
+              <artifactId>tomcat7-maven-plugin</artifactId>
+              <version>${tomcat.plugin.version}</version>
+          </plugin>
+
+
+      </plugins>
     <finalName>FlipEuro</finalName>
   </build>
 </project>

@@ -8,7 +8,7 @@ package mt.com.casinoeuro.flipeuro.model;
  */
 public enum CurrencyType {
 
-    EURO("Euro"),
+    EUR("Euro"),
     GBP("Pound sterling"),
     CHF("Swiss franc"),
     SEK("Swedish kronor"),

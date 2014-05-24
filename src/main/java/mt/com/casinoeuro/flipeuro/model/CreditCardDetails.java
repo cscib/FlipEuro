@@ -8,14 +8,16 @@ package mt.com.casinoeuro.flipeuro.model;
  */
 public class CreditCardDetails {
 
+    /** The card number. */
     private String cardNumber;
 
+    /** The card holder's name */
     private String cardHoldersName;
 
-    private String cvv;
-
+    /** The expiry month. */
     private int expiryMonth;
 
+    /** The expiry year. */
     private int expiryYear;
 
     public String getCardNumber() {

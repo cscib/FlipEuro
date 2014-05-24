@@ -30,6 +30,9 @@ public class UserRegistration {
     /** The password. */
     private String password;
 
+    /** The address. */
+    private String address;
+
     public String getFirstName() {
         return firstName;
     }
@@ -54,4 +57,7 @@ public class UserRegistration {
         return password;
     }
 
+    public String getAddress() {
+        return address;
+    }
 }
