@@ -1,7 +1,7 @@
 package mt.com.casinoeuro.flipeuro.data.dao;
 
 import mt.com.casinoeuro.flipeuro.data.model.CreditCard;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * The Credit Card Dao interface.
@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0.0
  * @since 24/05/2014 14:33
  */
-public interface CreditCardDao extends JpaRepository<CreditCard, Long> {
+public interface CreditCardDao extends CrudRepository<CreditCard, Long> {
 }

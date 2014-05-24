@@ -23,6 +23,7 @@ public class CoinFlip {
     private User userByUserId;
 
     @Id
+    @GeneratedValue
     @Column(name = "COIN_FLIP_ID", nullable = false, insertable = true, updatable = true)
     public Long getCoinFlipId() {
         return coinFlipId;
@@ -33,7 +34,7 @@ public class CoinFlip {
     }
 
     @Basic
-    @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "USER_ID", nullable = false, insertable = false, updatable = false)
     public Long getUserId() {
         return userId;
     }
@@ -43,7 +44,7 @@ public class CoinFlip {
     }
 
     @Basic
-    @Column(name = "COIN_ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "COIN_ID", nullable = false, insertable = false, updatable = false)
     public Long getCoinId() {
         return coinId;
     }

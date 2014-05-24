@@ -22,6 +22,7 @@ public class CreditCard {
     private Collection<Deposit> depositsByCreditCardId;
 
     @Id
+    @GeneratedValue
     @Column(name = "CREDIT_CARD_ID", nullable = false, insertable = true, updatable = true)
     public Long getCreditCardId() {
         return creditCardId;
@@ -32,7 +33,7 @@ public class CreditCard {
     }
 
     @Basic
-    @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "USER_ID", nullable = false, insertable = false, updatable = false)
     public Long getUserId() {
         return userId;
     }

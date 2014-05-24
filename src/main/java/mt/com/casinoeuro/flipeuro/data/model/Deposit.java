@@ -20,6 +20,7 @@ public class Deposit {
     private User userByUserId;
 
     @Id
+    @GeneratedValue
     @Column(name = "DEPOSIT_ID", nullable = false, insertable = true, updatable = true)
     public Long getDepositId() {
         return depositId;
@@ -30,7 +31,7 @@ public class Deposit {
     }
 
     @Basic
-    @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "USER_ID", nullable = false, insertable = false, updatable = false)
     public Long getUserId() {
         return userId;
     }
@@ -40,7 +41,7 @@ public class Deposit {
     }
 
     @Basic
-    @Column(name = "CREDIT_CARD_ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "CREDIT_CARD_ID", nullable = false, insertable = false, updatable = false)
     public Long getCreditCardId() {
         return creditCardId;
     }

@@ -15,7 +15,7 @@
     <context:component-scan base-package="mt.com.casinoeuro.flipeuro"/>
 
 
-    <import resource="flip-euro-data.xml"/>
+    <import resource="test-flip-euro-data.xml"/>
 
     <!-- the mvc resources tag -->
     <mvc:resources mapping="/resources/**" location="/WEB-INF/templates/"/>

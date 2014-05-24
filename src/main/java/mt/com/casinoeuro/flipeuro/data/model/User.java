@@ -27,6 +27,7 @@ public class User {
     private Role roleByRoleId;
 
     @Id
+    @GeneratedValue
     @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true)
     public Long getUserId() {
         return userId;
@@ -107,7 +108,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "ROLE_ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "ROLE_ID", nullable = false, insertable = false, updatable = false)
     public Long getRoleId() {
         return roleId;
     }

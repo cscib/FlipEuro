@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="FlipEuroPU">
+        <class>mt.com.casinoeuro.flipeuro.data.model.Coin</class>
+        <class>mt.com.casinoeuro.flipeuro.data.model.CoinFlip</class>
+        <class>mt.com.casinoeuro.flipeuro.data.model.CreditCard</class>
+        <class>mt.com.casinoeuro.flipeuro.data.model.Deposit</class>
+        <class>mt.com.casinoeuro.flipeuro.data.model.Role</class>
+        <class>mt.com.casinoeuro.flipeuro.data.model.User</class>
+       <!-- <properties>
+            <property name="hibernate.connection.url"
+                      value="jdbc:hsqldb:file:db/hsqldb/flip-euro-db"/>
+            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbc.JDBCDriver"/>
+            <property name="hibernate.connection.username" value="sa"/>
+            <property name="hibernate.connection.password" value=""/>
+        </properties> -->
+    </persistence-unit>
+</persistence>

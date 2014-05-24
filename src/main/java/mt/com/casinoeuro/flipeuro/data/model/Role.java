@@ -16,6 +16,7 @@ public class Role {
     private Collection<User> usersByRoleId;
 
     @Id
+    @GeneratedValue
     @Column(name = "ROLE_ID", nullable = false, insertable = true, updatable = true)
     public Long getRoleId() {
         return roleId;

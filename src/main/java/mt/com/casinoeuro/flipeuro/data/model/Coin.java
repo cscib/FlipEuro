@@ -18,6 +18,7 @@ public class Coin {
     private Collection<CoinFlip> coinFlipsByCoinId;
 
     @Id
+    @GeneratedValue
     @Column(name = "COIN_ID", nullable = false, insertable = true, updatable = true)
     public Long getCoinId() {
         return coinId;
