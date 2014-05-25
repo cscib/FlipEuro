@@ -1,5 +1,6 @@
 package mt.com.casinoeuro.flipeuro.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,7 +10,9 @@ import java.util.Date;
  * @version 1.0.0
  * @since 23/05/14 19.21
  */
-public class UserRegistration {
+public class UserRegistration implements Serializable {
+
+    private static final long serialVersionUID = 6176879792718057872L;
 
     /** The first name. */
     private String firstName;

@@ -1,1 +1,63 @@
-FLIPEURO
+<html class="webkit en-section js  gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions fontface domloaded cufon-active cufon-ready w-1400 lt-1440 lt-1680 lt-1920">
+<head>
+    <title>FlipEuro - Online Casino</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="Content-language" content="en"/>
+    <meta name="description"
+          content="FlipEuro is Europe's favorite online casino where you can play the best casino games. "/>
+    <meta name="keywords" content="FlipEuro"/>
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="https://casinoeuro.hs.llnwd.net/e2/optcss/gzip_N1308086896/bundles/GlobalCSS.css"/>
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="https://casinoeuro.hs.llnwd.net/e2/optcss/gzip_N535088686/bundles/casinoeuroCSS.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css"/>
+    <script type="text/javascript" src="js/lib/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript">
+
+        jQuery.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            jQuery.each(a, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+        jQuery(document).ready(function () {
+
+            jQuery('#loginForm').submit(function () {
+                jQuery.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    url: this.action,
+                    data: JSON.stringify(jQuery('#loginForm').serializeObject()),
+                    success: function (response) {
+                        alert('OK');
+                    },
+                    error: function () {
+                        jQuery('#loginMessage').html('<span>An error has occured.</span>');
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+</head>
+<body>
+<section id="site">
+    #parse("header.html")
+    #parse("menu.html")
+    #parse("registration.html")
+</section>
+</body>
+</html>		

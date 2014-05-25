@@ -6,11 +6,13 @@ import java.util.Collection;
 
 /**
  * User entity.
+ *
  * @author cscib
  * @version 1.0.0
  * @since 24/05/14 11.03
  */
 @Entity
+@NamedQuery(name = "User.getUserByUsername", query = "from User u where u.username = ?1")
 public class User {
     private Long userId;
     private String firstname;

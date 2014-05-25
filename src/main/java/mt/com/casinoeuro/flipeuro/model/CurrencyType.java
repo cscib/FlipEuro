@@ -1,5 +1,7 @@
 package mt.com.casinoeuro.flipeuro.model;
 
+import java.io.Serializable;
+
 /**
  * The currency type model representation.
  * @author cscib

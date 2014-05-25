@@ -37,24 +37,6 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!--
-    <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextClass</param-name>
-            <param-value>
-                org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-            </param-value>
-        </init-param>
-
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>com.stormpath.sample.web.configuration.DispatcherServletConfiguration</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet> -->
-
     <servlet>
         <servlet-name>flip-euro</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -63,8 +45,12 @@
 
     <servlet-mapping>
         <servlet-name>flip-euro</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/view/*</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>flip-euro</servlet-name>
+        <url-pattern>/json/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>

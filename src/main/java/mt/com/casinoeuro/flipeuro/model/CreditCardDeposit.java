@@ -1,5 +1,6 @@
 package mt.com.casinoeuro.flipeuro.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -8,7 +9,9 @@ import java.math.BigDecimal;
  * @version 1.0.0
  * @since  23/05/14 19.45
  */
-public class CreditCardDeposit {
+public class CreditCardDeposit implements Serializable {
+
+    private static final long serialVersionUID = -3726929221488418781L;
 
     /** The credit card Id. */
     private long creditCardId;

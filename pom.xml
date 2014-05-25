@@ -22,6 +22,7 @@
         <hibernate-jpa-version>1.0.0.Final</hibernate-jpa-version>
         <tomcat.plugin.version>2.2</tomcat.plugin.version>
         <apache-shiro.version>1.2.2</apache-shiro.version>
+        <jackson.version>1.9.10</jackson.version>
     </properties>
 
     <dependencies>
@@ -126,6 +127,13 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate-version}</version>
+        </dependency>
+
+        <!-- Jackson -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!-- hsqldb dependency -->
