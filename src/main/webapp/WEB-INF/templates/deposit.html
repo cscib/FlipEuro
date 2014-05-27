@@ -1,3 +1,189 @@
-<br>
-<br>
-Deposit screen is under construction.
+<script>
+    jQuery('#depositForm').submit(function () {
+        jQuery.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            url: this.action,
+            data: JSON.stringify(jQuery('#depositForm').serializeObject()),
+            success: function (response) {
+                if (response.data.successful) {
+                    jQuery('#dashboard').html('<br><br><span>Deposit successful! Dear ' + response.data.username + ' , thank you for depositing. Now you have a balance of ' + response.data.balance + '.</span>');
+                    jQuery('#loginMessage').html('<span>Logged in as ' + response.data.username + ' | Balance ' + response.data.balance + ' </span>');
+                } else {
+                    jQuery('#dashboard').html('<br><br><span>Deposit Error. Please try again.</span>');
+                }
+
+            },
+            error: function () {
+                jQuery('#dashboard').html('<span>An error has occured.</span>');
+            }
+        });
+        return false;
+    });
+
+</script>
+<article class="general content-page">
+
+    <header class="page">
+    </header>
+
+    <div class="body ">
+        <div class="content-container">
+            <div class="content">
+                <section class="intro regIntro">
+                    <h2>
+                        <cufon class="cufon cufon-canvas" alt="Registration " style="width: 200px; height: 18px;">
+                            <canvas width="1" height="25"
+                                    style="width: 1px; height: 25px; top: -6px; left: -2px;"></canvas>
+                            <cufontext>Make a deposit and start PLAYING !!</cufontext>
+                        </cufon>
+                    </h2>
+                    <div class="extraDiv regIntroExtraDiv"></div>
+                </section>
+                <form id="depositForm" action="json/deposit" method="post">
+                    <div class="form-error" style="display: none"></div>
+
+                    <section class="fieldset">
+                        <h3 class="section marginBottom noTopMargin">
+                            <cufon class="cufon cufon-canvas" alt="1. " style="width: 15px; height: 12px;">
+                                <canvas width="10" height="17"
+                                        style="width: 10px; height: 17px; top: -4px; left: -1px;">
+                                </canvas>
+                                <cufontext>1.</cufontext>
+                            </cufon>
+                            <cufon class="cufon cufon-canvas" alt="Register " style="width: 52px; height: 12px;">
+                                <canvas width="200" height="17"
+                                        style="width: 20px; height: 17px; top: -4px; left: -1px;"></canvas>
+                                <cufontext>Provide the credit card details</cufontext>
+                            </cufon>
+                        </h3>
+
+                        <div id="depositForm_cardNumber-field"
+                             class="form-field-wrapper clearfix   &nbsp; validate">
+                            <label for="depositForm_cardNumber">
+                                Card Number
+                            </label>
+
+                            <span class="icon info tooltip" title="">i</span>
+
+                            <div class="form-field  &nbsp; text">
+                                <input type="text" class="validate-field" name="cardNumber" id="depositForm_cardNumber"
+                                       value=""
+                                       maxlength="16" placeholder="" tabindex="1">
+                                <span class="validation-indicator"></span>
+                            </div>
+                        </div>
+
+                        <div id="depositForm_cardHoldersName-field"
+                             class="form-field-wrapper clearfix   &nbsp; validate">
+
+                            <label for="depositForm_cardHoldersName">
+                                Card Holder's Name
+                            </label>
+
+                            <span class="icon info tooltip" title="">i</span>
+
+                            <div class="form-field  &nbsp;">
+                                <input type="text" class="validate-field" name="cardHoldersName"
+                                       id="depositForm_cardHoldersName" value=""
+                                       maxlength="30" placeholder="" tabindex="2">
+                                <span class="validation-indicator"></span>
+                            </div>
+                        </div>
+
+                        <div id="depositForm_expiryMonth-field" class="form-field-wrapper clearfix   &nbsp; validate">
+                            <label for="depositForm_expiryMonth">
+                                Expiry Month
+                            </label>
+
+                            <span class="icon info tooltip" title="">i</span>
+
+                            <div class="form-field  &nbsp; ">
+                                <input type="text" class="validate-field" name="expiryMonth"
+                                       id="depositForm_expiryMonth" value=""
+                                       maxlength="2" placeholder="" tabindex="3">
+                                <span class="validation-indicator"></span>
+                            </div>
+                        </div>
+
+
+                        <div id="depositForm_expiryYear-field" class="form-field-wrapper clearfix   &nbsp; validate">
+                            <label for="depositForm_expiryYear">
+                                Expiry Year
+                            </label>
+
+                            <span class="icon info tooltip" title="">i</span>
+
+                            <div class="form-field  &nbsp; ">
+                                <input type="text" class="validate-field" name="expiryYear" id="depositForm_expiryYear"
+                                       value=""
+                                       maxlength="2" placeholder="" tabindex="3">
+                                <span class="validation-indicator"></span>
+                            </div>
+                        </div>
+
+                    </section>
+                    <section>
+                        <h3 class="section marginBottom marginTop">
+                            <cufon class="cufon cufon-canvas" alt="2. " style="width: 15px; height: 12px;">
+                                <canvas width="10" height="17"
+                                        style="width: 10px; height: 17px; top: -4px; left: -1px;"></canvas>
+                                <cufontext>2.</cufontext>
+                            </cufon>
+                            <cufon class="cufon cufon-canvas" alt="Provide " style="width: 50px; height: 12px;">
+                                <canvas width="200" height="17"
+                                        style="width: 10px; height: 17px; top: -4px; left: -1px;"></canvas>
+                                <cufontext>Provide the deposit amount</cufontext>
+                            </cufon>
+                            <cufon class="cufon cufon-canvas" alt="your " style="width: 200px; height: 12px;">
+                        </h3>
+
+                        <div id="depositForm_cvv-field" class="form-field-wrapper clearfix   &nbsp; validate">
+                            <label for="depositForm_cvv">
+                                CVV
+                            </label>
+
+                            <span class="icon info tooltip" title="">i</span>
+
+                            <div class="form-field  &nbsp; ">
+                                <input type="text" class="validate-field" name="cvv" id="depositForm_cvv" value=""
+                                       maxlength="3" placeholder="" tabindex="3">
+                                <span class="validation-indicator"></span>
+                            </div>
+                        </div>
+
+
+                        <div id="depositForm_depositAmount-field" class="form-field-wrapper clearfix   &nbsp; validate">
+                            <label for="depositForm_depositAmount">
+                                Deposit Amount
+                            </label>
+
+                            <div class="form-field  &nbsp; text">
+                                <input type="text" class="validate-field" name="depositAmount"
+                                       id="depositForm_depositAmount" value=""
+                                       maxlength="5" placeholder="" tabindex="4">
+                                <span class="validation-indicator"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="submitContainer" align="center">
+                            <button type="submit" class="new-standard-button blue bButton marginTop marginBottom"
+                                    tabindex="17">
+                                <span style="height:5%">DEPOSIT NOW</span>
+                            </button>
+                        </div>
+
+
+                    </section>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <footer>
+    </footer>
+</article>

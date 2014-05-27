@@ -1,6 +1,7 @@
 package mt.com.casinoeuro.flipeuro.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author Caroline
@@ -15,6 +16,11 @@ public class UserLoginResponse implements Serializable {
      * The username.
      */
     private String username;
+
+    /**
+     * The balance.
+     */
+    private Double balance;
 
     /**
      * Successful.
@@ -47,5 +53,23 @@ public class UserLoginResponse implements Serializable {
      */
     public void setSuccessful(boolean successful) {
         this.successful = successful;
+    }
+
+    /**
+     * Retrieves balance.
+     *
+     * @return balance
+     */
+    public Double getBalance() {
+        return balance;
+    }
+
+    /**
+     * Sets the balance.
+     *
+     * @param balance balance
+     */
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

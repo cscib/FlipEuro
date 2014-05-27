@@ -18,17 +18,17 @@ public class CoinMapper {
     /**
      * Maps a Coin Flip.
      *
-     * @param user        the user
-     * @param coinDetails the coin details
+     * @param user        {@link User}
+     * @param coinDetails {@link CoinDetails}
      * @param outcome     HEADS or TAILS
-     * @return Coin Flip.
+     * @return {@link CoinFlip}
      */
-    public static CoinFlip mapToCoinFlip(List<User> user, CoinDetails coinDetails, Coin coin, String outcome) {
+    public static CoinFlip mapToCoinFlip(User user, CoinDetails coinDetails, Coin coin, String outcome) {
         CoinFlip coinFlip = new CoinFlip();
         coinFlip.setBet(coinDetails.getFlipOption());
         coinFlip.setCoinFlipDate(new Date(new java.util.Date().getTime()));
         coinFlip.setCoinByCoinId(coin);
-        coinFlip.setUserByUserId(user.get(0));
+        coinFlip.setUserByUserId(user);
 
         coinFlip.setOutcome(outcome);
         return coinFlip;

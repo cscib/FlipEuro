@@ -15,6 +15,28 @@
     <script type="text/javascript" src="js/lib/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript">
 
+
+        function setInLoggedInMode(response) {
+            jQuery('#mainLogin').hide();
+            jQuery('#registerLink').hide();
+            jQuery('#registerMenuLink').hide();
+            jQuery('#logoutLink').show();
+
+            jQuery('#loginMessage').html('<span>Logged in as ' + response.data.username + ' | Balance ' + response.data.balance + ' </span>');
+
+            jQuery('#casinoGamesMenuLink').click();
+        }
+
+        function setInLoggedOutMode() {
+            jQuery('#mainLogin').show();
+            jQuery('#registerLink').show();
+            jQuery('#registerMenuLink').show();
+            jQuery('#logoutLink').hide();
+            jQuery('#loginMessage').html('');
+
+            jQuery('#registerMenuLink').click();
+        }
+
         jQuery.fn.serializeObject = function () {
             var o = {};
             var a = this.serializeArray();
@@ -41,10 +63,11 @@
                     url: this.action,
                     data: JSON.stringify(jQuery('#loginForm').serializeObject()),
                     success: function (response) {
-                        alert(response);
                         if (response.data.successful) {
-                            jQuery('#loginMessage').html('<span>Logged in as ' + response.data.username + '</span>');
+                            setInLoggedInMode(response);
+
                         } else {
+                            setInLoggedOutMode();
                             jQuery('#loginMessage').html('<span>Login Error. Please try again.</span>');
                         }
 
@@ -93,8 +116,8 @@
                     type: "GET",
                     url: "json/deposit",
                     data: "",
-                    success: function () {
-                        //alert('OK');
+                    success: function (htmlCode) {
+                        jQuery('#dashboard').html(htmlCode);
                     },
                     error: function () {
 
@@ -118,19 +141,40 @@
                 return false;
             });
 
+            jQuery('#logoutLink').click(function () {
+                jQuery.ajax({
+                    type: "GET",
+                    url: "json/logout",
+                    data: "",
+                    success: function () {
+                        // not logged in
+                        setInLoggedOutMode();
+                    },
+                    error: function () {
+
+                    }
+                });
+                return false;
+            });
 
             jQuery.ajax({
-                type: "GET",
+                type: "POST",
+                dataType: "json",
                 url: "json/isLoggedIn",
                 data: "",
-                success: function (loginCheckResponse) {
-                    alert(loginCheckResponse.data.username);
+                success: function (response) {
+                    if (response.data.successful == true) {
+                        //logged in
+                        setInLoggedInMode(response);
+                    } else {
+                        // not logged in
+                        setInLoggedOutMode();
+                    }
                 },
                 error: function () {
 
                 }
             });
-
         });
 
     </script>
@@ -142,4 +186,4 @@
     <div id="dashboard"/>
 </section>
 </body>
-</html>		
+</html>

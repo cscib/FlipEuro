@@ -2,6 +2,7 @@ package mt.com.casinoeuro.flipeuro.data.dao;
 
 import mt.com.casinoeuro.flipeuro.data.model.Role;
 import mt.com.casinoeuro.flipeuro.data.model.User;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,13 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Unit Test for the User Dao.
+ *
  * @author cscib
  * @version 1.0.0
  * @since 24/05/2014 15:45
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"/test-flip-euro-servlet.xml"})
+@ContextConfiguration(locations = {"/test-flip-euro-servlet.xml"})
 public class UserDaoTest {
 
     @Autowired
@@ -28,8 +30,9 @@ public class UserDaoTest {
     @Autowired
     private RoleDao roleDao;
 
+    @Ignore
     @Test
-    public void createUserTest(){
+    public void createUserTest() {
         Role role = new Role();
         role.setRoleName("NORMAL");
         roleDao.save(role);
@@ -41,7 +44,7 @@ public class UserDaoTest {
 
         assertNotNull(user.getUserId());
 
-        Iterable users =  userDao.findAll();
+        Iterable users = userDao.findAll();
 
         assertTrue(users.iterator().hasNext());
     }

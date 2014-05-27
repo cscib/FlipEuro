@@ -1,14 +1,12 @@
 package mt.com.casinoeuro.flipeuro.controller;
 
-import mt.com.casinoeuro.flipeuro.data.dao.CoinDao;
-import mt.com.casinoeuro.flipeuro.data.dao.CoinFlipDao;
-import mt.com.casinoeuro.flipeuro.data.dao.RoleDao;
-import mt.com.casinoeuro.flipeuro.data.dao.UserDao;
+import mt.com.casinoeuro.flipeuro.data.dao.*;
 import mt.com.casinoeuro.flipeuro.data.model.Coin;
 import mt.com.casinoeuro.flipeuro.data.model.Role;
 import mt.com.casinoeuro.flipeuro.data.model.User;
 import mt.com.casinoeuro.flipeuro.model.CurrencyType;
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
@@ -46,6 +44,15 @@ public abstract class BaseController {
     /* The coin flip Dao */
     @Autowired
     protected CoinFlipDao coinFlipDao;
+
+    /* The creidt card Dao */
+    @Autowired
+    protected CreditCardDao creditCardDao;
+
+    /* The deposit Dao */
+    @Autowired
+    protected DepositDao depositDao;
+
 
     /* Emumerator Roles */
     protected enum Roles {
@@ -141,6 +148,15 @@ public abstract class BaseController {
             coin.setName("Gold Mine");
             coinDao.save(coin);
         }
+    }
+
+    /**
+     * Retrieves the username from the principal object.
+     *
+     * @return username
+     */
+    protected String getUserNameFromPrincipal() {
+        return (String) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
     }
 
 }
