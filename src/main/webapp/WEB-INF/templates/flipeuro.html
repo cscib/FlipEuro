@@ -41,7 +41,13 @@
                     url: this.action,
                     data: JSON.stringify(jQuery('#loginForm').serializeObject()),
                     success: function (response) {
-                        alert('OK');
+                        alert(response);
+                        if (response.data.successful) {
+                            jQuery('#loginMessage').html('<span>Logged in as ' + response.data.username + '</span>');
+                        } else {
+                            jQuery('#loginMessage').html('<span>Login Error. Please try again.</span>');
+                        }
+
                     },
                     error: function () {
                         jQuery('#loginMessage').html('<span>An error has occured.</span>');
@@ -49,6 +55,82 @@
                 });
                 return false;
             });
+
+            jQuery('#registerMenuLink').click(function () {
+                jQuery.ajax({
+                    type: "GET",
+                    url: "json/register",
+                    data: "",
+                    success: function (htmlCode) {
+                        jQuery('#dashboard').html(htmlCode);
+                    },
+                    error: function () {
+
+                    }
+                });
+                return false;
+            });
+
+
+            jQuery('#registerLink').click(function () {
+                jQuery.ajax({
+                    type: "GET",
+                    url: "json/register",
+                    data: "",
+                    success: function (htmlCode) {
+                        jQuery('#dashboard').html(htmlCode);
+                    },
+                    error: function () {
+
+                    }
+                });
+                return false;
+            });
+
+
+            jQuery('#depositMenuLink').click(function () {
+                jQuery.ajax({
+                    type: "GET",
+                    url: "json/deposit",
+                    data: "",
+                    success: function () {
+                        //alert('OK');
+                    },
+                    error: function () {
+
+                    }
+                });
+                return false;
+            });
+
+            jQuery('#casinoGamesMenuLink').click(function () {
+                jQuery.ajax({
+                    type: "GET",
+                    url: "json/games",
+                    data: "",
+                    success: function (htmlCode) {
+                        jQuery('#dashboard').html(htmlCode);
+                    },
+                    error: function () {
+
+                    }
+                });
+                return false;
+            });
+
+
+            jQuery.ajax({
+                type: "GET",
+                url: "json/isLoggedIn",
+                data: "",
+                success: function (loginCheckResponse) {
+                    alert(loginCheckResponse.data.username);
+                },
+                error: function () {
+
+                }
+            });
+
         });
 
     </script>
@@ -57,7 +139,7 @@
 <section id="site">
     #parse("header.html")
     #parse("menu.html")
-    #parse("registration.html")
+    <div id="dashboard"/>
 </section>
 </body>
 </html>		

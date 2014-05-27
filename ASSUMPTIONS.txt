@@ -1,1 +1,6 @@
-1. Users of FlipEuro may deposit money only via credit cards
+1. Users of FlipEuro may deposit money only via credit cards.
+2. Remember me functionality not supported in this scope.
+3. When a customer register, he is automatically logged in and able to use the site.
+4. The initial balance for the user is set to zero.
+5. When registering from the website the customer will be given a "normal" role
+6. Game name is unique

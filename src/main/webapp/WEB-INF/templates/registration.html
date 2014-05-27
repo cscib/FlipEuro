@@ -1,3 +1,27 @@
+<script>
+    jQuery('#registrationForm').submit(function () {
+        jQuery.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            url: this.action,
+            data: JSON.stringify(jQuery('#registrationForm').serializeObject()),
+            success: function (response) {
+                if (response.data.successful) {
+                    jQuery('#dashboard').html('<br><br><span>Registeration successfull! Dear ' + response.data.username + ' , welcome to FlipEuro casino. Please start by depositing some funds into your account.</span>');
+                } else {
+                    jQuery('#dashboard').html('<br><br><span>Registration Error. Please try again.</span>');
+                }
+
+            },
+            error: function () {
+                jQuery('#loginMessage').html('<span>An error has occured.</span>');
+            }
+        });
+        return false;
+    });
+
+</script>
 <article class="general content-page">
 
 <header class="page">
@@ -41,9 +65,8 @@
     <div class="extraDiv regIntroExtraDiv"></div>
 
 </section>
-<form id="registrationForm" action="/backoffice/FormController" method="post">
+<form id="registrationForm" action="json/register" method="post">
     <div class="form-error" style="display: none"></div>
-    <input type="hidden" name="formName" value="registrationForm"/>
 
     <section class="fieldset">
         <h3 class="section marginBottom noTopMargin">
@@ -59,14 +82,14 @@
         </h3>
         <div id="registrationForm_userName-field"
              class="form-field-wrapper clearfix   &nbsp;                                                                                    validate">
-            <label for="registrationForm_userName">
+            <label for="registrationForm_username">
                 Username
             </label>
 
             <span class="icon info tooltip" title="">i</span>
 
             <div class="form-field  &nbsp; text">
-                <input type="text" class="validate-field" name="userName" id="registrationForm_userName" value=""
+                <input type="text" class="validate-field" name="username" id="registrationForm_userName" value=""
                        maxlength="16" placeholder="" tabindex="1">
                 <span class="validation-indicator"></span>
             </div>
@@ -140,13 +163,13 @@
             </div>
         </div>
 
-        <div id="registrationForm_familyName-field" class="form-field-wrapper clearfix   &nbsp; validate">
-            <label for="registrationForm_familyName">
+        <div id="registrationForm_lastName-field" class="form-field-wrapper clearfix   &nbsp; validate">
+            <label for="registrationForm_lastName">
                 Last name
             </label>
 
             <div class="form-field  &nbsp; text">
-                <input type="text" class="validate-field" name="familyName" id="registrationForm_familyName" value=""
+                <input type="text" class="validate-field" name="lastName" id="registrationForm_lastName" value=""
                        maxlength="20" placeholder="" tabindex="5">
                 <span class="validation-indicator"></span>
             </div>
@@ -160,13 +183,12 @@
 
             <div class="form-field  &nbsp; past date3">
 
-                <input type="hidden" class="validate-field" name="birthdate" id="registrationForm_birthdate" value="">
-                <select name="birthdate_day" id="registrationForm_birthdate_day" tabindex="7">
+                <select name="birthdateDay" id="registrationForm_birthdateDay" tabindex="7">
                     <option value="">day</option>
                     <option value="01">1</option>
                 </select>
 
-                <select name="birthdate_month" id="registrationForm_birthdate_month" tabindex="7">
+                <select name="birthdateMonth" id="registrationForm_birthdateMonth" tabindex="7">
                     <option value="">month</option>
                     <option value="01">January</option>
                     <option value="02">February</option>
@@ -182,7 +204,7 @@
                     <option value="12">December</option>
                 </select>
 
-                <select name="birthdate_year" id="registrationForm_birthdate_years" tabindex="7">
+                <select name="birthdateYear" id="registrationForm_birthdateYear" tabindex="7">
                     <option value="">year</option>
                     <option value="1996">1996</option>
                 </select>

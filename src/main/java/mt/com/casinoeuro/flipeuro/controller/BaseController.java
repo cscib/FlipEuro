@@ -1,8 +1,18 @@
 package mt.com.casinoeuro.flipeuro.controller;
 
+import mt.com.casinoeuro.flipeuro.data.dao.CoinDao;
+import mt.com.casinoeuro.flipeuro.data.dao.CoinFlipDao;
+import mt.com.casinoeuro.flipeuro.data.dao.RoleDao;
+import mt.com.casinoeuro.flipeuro.data.dao.UserDao;
+import mt.com.casinoeuro.flipeuro.data.model.Coin;
+import mt.com.casinoeuro.flipeuro.data.model.Role;
+import mt.com.casinoeuro.flipeuro.data.model.User;
+import mt.com.casinoeuro.flipeuro.model.CurrencyType;
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +27,31 @@ import java.text.SimpleDateFormat;
  * @since 25/05/2014 23:16
  */
 public abstract class BaseController {
+
+    /* The logger. */
+    private static final Logger log = Logger.getLogger(BaseController.class);
+
+    /* The user Dao */
+    @Autowired
+    protected UserDao userDao;
+
+    /* The role Dao */
+    @Autowired
+    protected RoleDao roleDao;
+
+    /* The coin Dao */
+    @Autowired
+    protected CoinDao coinDao;
+
+    /* The coin flip Dao */
+    @Autowired
+    protected CoinFlipDao coinFlipDao;
+
+    /* Emumerator Roles */
+    protected enum Roles {
+        normal,
+        backoffice
+    }
 
     /**
      * Reads an entire JSON object from the input stream, converting it to the specified type {@code T}.
@@ -64,4 +99,48 @@ public abstract class BaseController {
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         return mapper;
     }
+
+    protected void bootstrap() {
+        if (roleDao.count() == 0) {
+            log.info("Bootstrapping roles !!");
+            Role role = new Role();
+            role.setRoleName(Roles.normal.name());
+            roleDao.save(role);
+
+            role = new Role();
+            role.setRoleName(Roles.backoffice.name());
+            roleDao.save(role);
+        }
+        if (userDao.count() == 0) {
+            log.info("Bootstrapping admin !!");
+            Role role = roleDao.getRoleByRolename(Roles.backoffice.name()).get(0);
+            User user = new User();
+            user.setUsername("admin");
+            user.setPassword("l3tm31n");
+            user.setRoleByRoleId(role);
+            userDao.save(user);
+        }
+
+        if (coinDao.count() == 0) {
+            log.info("Bootstrapping coins !!");
+            Coin coin = new Coin();
+            coin.setCurrency(CurrencyType.GBP.name());
+            coin.setDenomination(10d);
+            coin.setName("Lucky Stars");
+            coinDao.save(coin);
+
+            coin = new Coin();
+            coin.setCurrency(CurrencyType.EUR.name());
+            coin.setDenomination(20d);
+            coin.setName("Silver Spring");
+            coinDao.save(coin);
+
+            coin = new Coin();
+            coin.setCurrency(CurrencyType.EUR.name());
+            coin.setDenomination(50d);
+            coin.setName("Gold Mine");
+            coinDao.save(coin);
+        }
+    }
+
 }

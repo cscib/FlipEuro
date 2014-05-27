@@ -10,6 +10,7 @@ import java.util.Collection;
  * @since 24/05/14 11.03
  */
 @Entity
+@NamedQuery(name = "Role.getRoleByRolename", query = "from Role r where r.roleName = ?1")
 public class Role {
     private Long roleId;
     private String roleName;

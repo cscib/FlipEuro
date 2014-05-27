@@ -43,6 +43,9 @@
                 /home = anon
                 /logout = anon
                 /json/login = anon
+                /json/register = anon
+                /json/deposit = authc
+                /json/games = authc
                 /json/normal/** = authc
                 /json/backoffice/** = authc, roles[backoffice]
                 /** = anon
@@ -79,6 +82,5 @@
         </property>
     </bean>
 
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 
 </beans>

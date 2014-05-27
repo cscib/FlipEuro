@@ -1,0 +1,70 @@
+<script>
+    jQuery('.casinoGamesForms').submit(function () {
+        alert('here');
+        jQuery.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json",
+            url: this.action,
+            data: JSON.stringify(jQuery(this).serializeObject()),
+            success: function (response) {
+                if (response.successful) {
+                    jQuery('#coinFlipResult').html('<br><br><span>' + response.messages[0].text + '</span>');
+                } else {
+                    jQuery('#coinFlipResult').html('<br><br><span>Coin Flip game encountered an error. Please try again.</span>');
+                }
+
+            },
+            error: function () {
+                jQuery('#coinFlipResult').html('<span>An error has occured.</span>');
+            }
+        });
+        return false;
+    });
+
+</script>
+
+<article class="general content-page">
+
+    <header class="page">
+    </header>
+
+    <div class="body ">
+        <div class="content-container">
+            <div class="content">
+                <h2>Choose a coin game and PLAY !!</h2>
+
+                <div id="coinFlipResult"></div>
+
+                #foreach( $coin in $coins )
+                <form name="coinForm_#${coin.coinId}" action="json/games" method="POST" class="casinoGamesForms">
+                    <table style="color:black">
+                        <section class="fieldset">
+                            <input type="hidden" name="coinId" value="$coin.coinId"/>
+                            <tr>
+                                <td>$velocityCount :&nbsp; </td>
+                                <td>$coin.name</td>
+                                <td>$coin.denomination</td>
+                                <td>$coin.currency</td>
+                                <td>
+                                    <select name="flipOption" id="flipOptionId" tabindex="1">
+                                        <option value="HEADS">HEADS</option>
+                                        <option value="TAILS">TAILS</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button type="submit"
+                                            class="new-standard-button blue bButton marginTop marginBottom"
+                                            tabindex="2"><span style="height:5%">PLAY !!</span></button>
+                                </td>
+                            </tr>
+                        </section>
+                    </table>
+                </form>
+                #end
+
+
+            </div>
+        </div>
+    </div>
+</article>

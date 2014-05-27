@@ -22,6 +22,16 @@ public class CoinDetails implements Serializable {
     /** The currency. */
     private CurrencyType currency;
 
+    /**
+     * HEADS or TAILS
+     */
+    private String flipOption;
+
+    /**
+     * The coin Id.
+     */
+    private Long coinId;
+
     public String getName() {
         return name;
     }
@@ -32,5 +42,13 @@ public class CoinDetails implements Serializable {
 
     public CurrencyType getCurrency() {
         return currency;
+    }
+
+    public String getFlipOption() {
+        return flipOption;
+    }
+
+    public Long getCoinId() {
+        return coinId;
     }
 }

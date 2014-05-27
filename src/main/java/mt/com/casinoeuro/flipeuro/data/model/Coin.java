@@ -10,6 +10,7 @@ import java.util.Collection;
  * @since 24/05/14 11.03
  */
 @Entity
+@NamedQuery(name = "Coin.getCoinByCoinId", query = "from Coin c where c.coinId = ?1")
 public class Coin {
     private Long coinId;
     private String name;
