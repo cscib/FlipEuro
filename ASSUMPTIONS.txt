@@ -55,3 +55,18 @@ Other assumptions:
 4. Remember me functionality not supported in this scope.
 5. When registering from the website the customer will be given a "normal" role
 6. Throughout the site, some html, css and logo where borrowed from casinoeuro
+
+Technologies used:
+------------------
+1. Maven 3
+2. Java 8
+3. Spring 4
+4. Apache Shiro
+5. Tomcat 8
+6. JPA 2.1
+7. Hibernate
+8. Spring Data
+9. HSQLDB
+10. Hibernate Validator
+11. Jackson
+12. JQuery
