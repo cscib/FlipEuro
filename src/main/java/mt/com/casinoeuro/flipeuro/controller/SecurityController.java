@@ -6,12 +6,14 @@ import mt.com.casinoeuro.flipeuro.model.UserLogin;
 import mt.com.casinoeuro.flipeuro.model.UserLoginResponse;
 import mt.com.casinoeuro.flipeuro.model.UserRegistration;
 import mt.com.casinoeuro.flipeuro.model.mapper.UserMapper;
+import mt.com.casinoeuro.flipeuro.util.AddressVerificationService;
 import mt.com.casinoeuro.flipeuro.util.JsonResponse;
 import mt.com.casinoeuro.flipeuro.util.Message;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +23,6 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -38,7 +39,12 @@ public class SecurityController extends BaseController {
 
     private static final Logger log = Logger.getLogger(SecurityController.class);
 
+    @Autowired
+    private AddressVerificationService addressVerificationService;
 
+    /**
+     * This method is used to call the bootstrap to make sure there is test data in DB.
+     */
     @PostConstruct
     public void initialize() {
         bootstrap();
@@ -161,14 +167,24 @@ public class SecurityController extends BaseController {
         try {
 
             UserRegistration userRegistration = this.objectFromStream(servletRequest.getInputStream(), UserRegistration.class);
+            validate(userRegistration, UserRegistration.class, json);
+            if (json.getMessages() != null && !json.getMessages().isEmpty()) {
+                this.objectToStream(servletResponse.getOutputStream(), json);
+                return;
+            }
 
-            // Only 1 row should be retrieved
-            Role role = roleDao.getRoleByRolename(Roles.normal.name()).get(0);
+            if (!addressVerification(userRegistration.getAddress())) {
+                json.addMessage(new Message("Supplied address fails verification checks. Please enter a valid address.", Message.Type.ERROR));
+                return;
+            }
 
             if (existsUsers(userRegistration.getUsername())) {
                 json.addMessage(new Message("User " + userRegistration.getUsername() + " already exists!", Message.Type.ERROR));
                 return;
             }
+
+            // Only 1 row should be retrieved
+            Role role = roleDao.getRoleByRolename(Roles.normal.name()).get(0);
 
             User user = null;
 
@@ -183,6 +199,7 @@ public class SecurityController extends BaseController {
             //Return status and user information
             userLoginResponse.setUsername(userRegistration.getUsername());
             userLoginResponse.setSuccessful(true);
+            userLoginResponse.setBalance(user.getBalance());
 
         } catch (ParseException e) {
             json.addMessage(new Message("Birth date validation failed", Message.Type.ERROR));
@@ -190,6 +207,10 @@ public class SecurityController extends BaseController {
             this.objectToStream(servletResponse.getOutputStream(), json);
         }
 
+    }
+
+    private boolean addressVerification(String address) {
+        return addressVerificationService.verifyAddress(address);
     }
 
     /**

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The Casino Games Controller.
@@ -30,6 +30,8 @@ import java.util.List;
 public class CasinoGamesController extends BaseController {
 
     public static final String HEADS = "HEADS";
+    public static final String TAILS = "TAILS";
+    private static Random random = new Random();
 
     @RequestMapping(method = RequestMethod.GET, value = "/games")
     public String renderGamesScreen(ModelMap map) throws IOException {
@@ -62,7 +64,7 @@ public class CasinoGamesController extends BaseController {
 
             if (user.getBalance() >= coin.getDenomination()) {
 
-                CoinFlip coinFlip = CoinMapper.mapToCoinFlip(user, coinDetails, coin, HEADS);
+                CoinFlip coinFlip = CoinMapper.mapToCoinFlip(user, coinDetails, coin, getRandomOutcome());
                 coinFlipDao.save(coinFlip);
 
                 if (coinFlip.getOutcome().equals(coinFlip.getBet())) {
@@ -86,5 +88,17 @@ public class CasinoGamesController extends BaseController {
         }
     }
 
+
+    /*
+    * Returns a random game outcome
+     */
+    private String getRandomOutcome() {
+
+        if (random.nextBoolean()) {
+            return HEADS;
+        } else {
+            return TAILS;
+        }
+    }
 
 }

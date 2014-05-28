@@ -82,5 +82,7 @@
         </property>
     </bean>
 
+    <!-- The Validator factory -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
 </beans>

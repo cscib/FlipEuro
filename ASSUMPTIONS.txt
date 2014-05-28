@@ -1,12 +1,12 @@
 DE-POC1:
 1. The registration page is functional and accessible by an anonymous user.
-2. There is not client side validations and the server side validation should be enhanced
+2. There is no client side validations and the website relies on server side validation only.
 3. Once a user registers, he/she is logged in automatically in the system and ready to play
 4. New users are set with an initial balance of 50 Euro
 5. Some html, css and logo where borrowed from casinoeuro
 
 DE-POC2:
-1. Users can login to the casino and once logged in they are give forwarded to the
+1. Users can login to the casino and once logged in they are forwarded to the
 Casino Games page so that they start playing.
 2. Once logged in the user will remain logged in until session expires or he/she decides to logout.
 3. Only logged in users can access the Deposits and Casino Games pages.
@@ -16,34 +16,36 @@ DE-POC3:
 
 DE-POC4:
 1. Users can add their credit card details and deposit money.
-2. There is not client side validations and the server side validation should be enhanced
-3. The Luhn check algorithm is still not implemented up to this moment.
+2. There is no client side validations and all validations are done on server side.
+3. The Luhn check algorithm is implemented using the Hibernate validations library (hibernate-validator).
+4. A minimum deposit of 10 has been implemented.
 
 DE-POC5:
 1. The address information was added to the registration process.
-2. No client side and server side validation are done up to this moment.
+2. No client side and server side validation are done so that the address is sent to the validation process.
 
 DE-POC6:
-1. The functionality to add a coin by Backend Users is not yet impmented though Apache Shiro
-is fully configured and everything the backend already supports this.
-2. The coins present in the system are loaded post Spring autowiring from the Security Controller
-and so logged in users can still bet on the outcome of flipped coins.
+1. The functionality to add a coin by Backend Users is not yet implemented. Apache Shiro
+is fully configured and auth roles in backend already supports this.
+2. The coins present in the system are created from a post Spring autowiring process, from the Security Controller.
+   Logged in users can still bet on the outcome of flipped coins.
 
 DE-POC7 to DE-POC9:
 1. No registration process for the backend users is currently present.
-Presently for users to be given this functionality, these should be inserted directly in the databse
+Presently for users to be given this functionality, these should be inserted directly in the database
 2. No login screen for backoffice users.
 
 DE-POC10:
-1. The users can place a bet and the outcome will be stored on database.
-2. The users are given any money if they "win" (Press on Home to refresh the screen)
+1. The users can place a bet and the random outcome will be stored on database.
+2. Users will be advised if they win or lose and balance will be updated accordingly
+3. The users are given money if they "win" (Press on Home to refresh the screen)
 
 DE-POC11:
-1. The game page was created i.e. Casino Games
+1. The game page was created as 'Casino Games'
 
 DE-POC12 and DE-POC13:
 1. The statistics page is not implemented but the backend is fully configured for this.
-Games played are already being saved.
+Played games are currently being saved as transactions in CoinFlip table.
 
 Other assumptions:
 ----------------------
@@ -52,3 +54,4 @@ Other assumptions:
 3. If a user posts credit card number belonging to another registered user the system gives an error.
 4. Remember me functionality not supported in this scope.
 5. When registering from the website the customer will be given a "normal" role
+6. Throughout the site, some html, css and logo where borrowed from casinoeuro

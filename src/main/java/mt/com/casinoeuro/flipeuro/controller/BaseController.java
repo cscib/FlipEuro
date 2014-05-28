@@ -5,6 +5,8 @@ import mt.com.casinoeuro.flipeuro.data.model.Coin;
 import mt.com.casinoeuro.flipeuro.data.model.Role;
 import mt.com.casinoeuro.flipeuro.data.model.User;
 import mt.com.casinoeuro.flipeuro.model.CurrencyType;
+import mt.com.casinoeuro.flipeuro.util.JsonResponse;
+import mt.com.casinoeuro.flipeuro.util.Message;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -12,10 +14,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * An abstract class to be the parent of other controllers.
@@ -28,6 +34,10 @@ public abstract class BaseController {
 
     /* The logger. */
     private static final Logger log = Logger.getLogger(BaseController.class);
+
+    /* The Hibernate Validator */
+    @Autowired
+    private Validator validator;
 
     /* The user Dao */
     @Autowired
@@ -159,4 +169,26 @@ public abstract class BaseController {
         return (String) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
     }
 
+    /**
+     * Validates a form object using the Hibernate library, and fills the json respnse.
+     *
+     * @param formObject
+     * @param type
+     * @param json
+     * @param <T>
+     */
+    protected <T> void validate(T formObject, Class<T> type, JsonResponse json) {
+
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(formObject);
+
+        Iterator<ConstraintViolation<T>> constraintIterator = constraintViolations.iterator();
+
+        while (constraintIterator.hasNext()) {
+
+            ConstraintViolation<T> constraintViolation = constraintIterator.next();
+
+            json.addMessage(new Message(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage(), Message.Type.ERROR));
+        }
+
+    }
 }

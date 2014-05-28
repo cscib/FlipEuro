@@ -59,6 +59,13 @@ public class DepositController extends BaseController {
             // Retrieve the object CreditCardDeposit from the request
             CreditCardDeposit creditCardDeposit = this.objectFromStream(servletRequest.getInputStream(), CreditCardDeposit.class);
 
+            // Validate
+            validate(creditCardDeposit, CreditCardDeposit.class, json);
+            if (json.getMessages() != null && !json.getMessages().isEmpty()) {
+                this.objectToStream(servletResponse.getOutputStream(), json);
+                return;
+            }
+
             List<CreditCard> creditCards = creditCardDao.getCreditCardByCardNumber(creditCardDeposit.getCardNumber());
 
             CreditCard creditCard = null;

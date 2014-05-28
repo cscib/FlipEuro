@@ -10,6 +10,7 @@
             success: function (response) {
                 if (response.successful) {
                     jQuery('#coinFlipResult').html('<br><br><span>' + response.messages[0].text + '</span>');
+
                 } else {
                     jQuery('#coinFlipResult').html('<br><br><span>Coin Flip game encountered an error. Please try again.</span>');
                 }

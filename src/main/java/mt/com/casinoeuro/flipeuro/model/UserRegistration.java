@@ -1,5 +1,8 @@
 package mt.com.casinoeuro.flipeuro.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.ScriptAssert;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -11,6 +14,7 @@ import java.util.Date;
  * @version 1.0.0
  * @since 23/05/14 19.21
  */
+@ScriptAssert(lang = "javascript", script = "_this.password1.equals(_this.password2)", message = "Passwords are not identical.")
 public class UserRegistration implements Serializable {
 
     private static final long serialVersionUID = 6176879792718057872L;
@@ -18,11 +22,13 @@ public class UserRegistration implements Serializable {
     /**
      * The first name.
      */
+    @NotEmpty
     private String firstName;
 
     /**
      * The last name.
      */
+    @NotEmpty
     private String lastName;
 
     /**
@@ -33,16 +39,19 @@ public class UserRegistration implements Serializable {
     /**
      * The username.
      */
+    @NotEmpty
     private String username;
 
     /**
      * The password.
      */
+    @NotEmpty
     private String password1;
 
     /**
      * The password verification.
      */
+    @NotEmpty
     private String password2;
 
     /**
@@ -53,21 +62,25 @@ public class UserRegistration implements Serializable {
     /**
      * Birthday day
      */
+    @NotEmpty
     private String birthdateDay;
 
     /**
      * Birthday day
      */
+    @NotEmpty
     private String birthdateMonth;
 
     /**
      * Birthday day
      */
+    @NotEmpty
     private String birthdateYear;
 
     /**
      * Terms and Conditions
      */
+    @NotEmpty(message = "Please accept the terms and conditions.")
     private String terms;
 
     public String getFirstName() {

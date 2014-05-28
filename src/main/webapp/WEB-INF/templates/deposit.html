@@ -8,10 +8,23 @@
             data: JSON.stringify(jQuery('#depositForm').serializeObject()),
             success: function (response) {
                 if (response.data.successful) {
+                    jQuery('#errorReportDeposit').html('');
+                    jQuery('#errorReportDeposit').hide();
                     jQuery('#dashboard').html('<br><br><span>Deposit successful! Dear ' + response.data.username + ' , thank you for depositing. Now you have a balance of ' + response.data.balance + '.</span>');
                     jQuery('#loginMessage').html('<span>Logged in as ' + response.data.username + ' | Balance ' + response.data.balance + ' </span>');
                 } else {
-                    jQuery('#dashboard').html('<br><br><span>Deposit Error. Please try again.</span>');
+                    if (response.messages.length > 0) {
+                        htmlContent = '<span>Please correct the following errors: <br/><br/>';
+
+                        for (x = 0; x < response.messages.length; x++) {
+                            htmlContent += (response.messages[x].text + '</br>')
+                        }
+                        htmlContent += '</span>';
+
+                        jQuery('#errorReportDeposit').html(htmlContent);
+                        jQuery('#errorReportDeposit').show();
+                    }
+
                 }
 
             },
@@ -42,7 +55,7 @@
                     <div class="extraDiv regIntroExtraDiv"></div>
                 </section>
                 <form id="depositForm" action="json/deposit" method="post">
-                    <div class="form-error" style="display: none"></div>
+                    <div id="errorReportDeposit" class="form-error" style="display: none"></div>
 
                     <section class="fieldset">
                         <h3 class="section marginBottom noTopMargin">
